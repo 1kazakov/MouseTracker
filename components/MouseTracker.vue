@@ -1,13 +1,16 @@
 <template>
   <div class="mouse-tracker">
-    <Typography color="purple" isItalic>
+    <Typography
+      color="purple"
+      is-italic
+    >
       Координаты курсора: X: {{ x }}, Y: {{ y }}
     </Typography>
   </div>
 </template>
 
 <script setup lang="ts">
-import Typography from "~/components/Typography.vue";
+import Typography from '~/components/Typography.vue';
 
 const safeLocalStorage = useSafeLocalStorage();
 
@@ -20,10 +23,7 @@ const setNewCoordinates = (newX: number, newY: number) => {
 };
 
 const saveNewCoordinatesToStorage = (newX: number, newY: number) => {
-  safeLocalStorage.setItem(
-    "mouseCoordinates",
-    JSON.stringify({ x: x.value, y: y.value })
-  );
+  safeLocalStorage.setItem('mouseCoordinates', JSON.stringify({ x: x.value, y: y.value }));
 };
 
 const updateCoordinates = (newX: number, newY: number) => {
@@ -35,8 +35,8 @@ const onUpdateCoordinates = (event) => {
   updateCoordinates(event.clientX, event.clientY);
 };
 
-const getCoordinatesFromStorage = () =>
-  safeLocalStorage.getItem("mouseCoordinates");
+const getCoordinatesFromStorage = () => safeLocalStorage.getItem('mouseCoordinates');
+safeLocalStorage.getItem(undefined);
 
 const getSavedCoordinatesFromStorage = () => {
   const savedCoords = getCoordinatesFromStorage();
@@ -46,7 +46,7 @@ const getSavedCoordinatesFromStorage = () => {
   try {
     return JSON.parse(savedCoords);
   } catch (error) {
-    console.error("Сохраненные данные не валидны:", error);
+    console.error('Сохраненные данные не валидны:', error);
     return null;
   }
 };
@@ -59,7 +59,7 @@ const setSavedCoordinates = () => {
 };
 
 const onWatchStorageValues = (event) => {
-  if (event.key === "mouseCoordinates") {
+  if (event.key === 'mouseCoordinates') {
     setSavedCoordinates();
   }
 };
@@ -69,16 +69,16 @@ onMounted(() => {
   setSavedCoordinates();
 
   // Следим за координатами в текущей вкладке
-  window.addEventListener("mousemove", onUpdateCoordinates);
+  window.addEventListener('mousemove', onUpdateCoordinates);
 
   // Обрабатываем событие изменения localStorage для синхронизации координат между вкладками
-  window.addEventListener("storage", onWatchStorageValues);
+  window.addEventListener('storage', onWatchStorageValues);
 });
 
 onBeforeUnmount(() => {
   // Отписываемся чтобы не было утечки памяти
-  window.removeEventListener("mousemove", onUpdateCoordinates);
-  window.removeEventListener("storage", onWatchStorageValues);
+  window.removeEventListener('mousemove', onUpdateCoordinates);
+  window.removeEventListener('storage', onWatchStorageValues);
 });
 </script>
 

@@ -8,7 +8,7 @@
       lineHeight: lineHeight,
     }"
   >
-    <slot />
+    <slot></slot>
   </component>
 </template>
 
@@ -23,28 +23,28 @@ type PropTypes = {
 };
 
 const props = withDefaults(defineProps<PropTypes>(), {
-  tag: "p",
-  color: "#000000",
-  size: "1rem",
-  lineHeight: "1.5",
+  tag: 'p',
+  color: '#000000',
+  size: '1rem',
+  lineHeight: '1.5',
   isBold: false,
   isItalic: false,
 });
 
 const typographyClass = computed(() => {
   switch (props.tag) {
-    case "h1":
-      return "text-h1";
-    case "h2":
-      return "text-h2";
-    case "h3":
-      return "text-h3";
-    case "p":
-      return "text-paragraph";
-    case "span":
-      return "text-span";
+    case 'h1':
+      return 'text-h1';
+    case 'h2':
+      return 'text-h2';
+    case 'h3':
+      return 'text-h3';
+    case 'p':
+      return 'text-paragraph';
+    case 'span':
+      return 'text-span';
     default:
-      return "text-paragraph";
+      return 'text-paragraph';
   }
 });
 </script>

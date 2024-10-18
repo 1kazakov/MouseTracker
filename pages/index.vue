@@ -5,6 +5,5 @@
 </template>
 
 <script setup>
-import MouseTracker from '~/components/MouseTracker.vue'
-
+import MouseTracker from '~/components/MouseTracker.vue';
 </script>
